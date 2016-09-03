@@ -1,0 +1,19 @@
+version: '2'
+services:
+  scoreboard:
+    # build: scoreboard/
+    image: taichunmin/git-it-course-docker:scoreboard
+    ports:
+      - "80:80"
+      - "22000:22"
+    container_name: scoreboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  client:
+    build: /root/docker-git-it
+    ports:
+      - "22"
+    links:
+      - scoreboard
+    depends_on:
+      - scoreboard
